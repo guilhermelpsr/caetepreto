@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Caeté Preto - MPB & Bossa Nova</title>
     
     <!-- Tailwind CSS -->
@@ -21,15 +21,16 @@
             font-family: 'Inter', sans-serif;
             background-color: #000;
             color: #fff;
-            overflow-x: hidden;
+            overflow: hidden;
             margin: 0;
-            overscroll-behavior-y: none; 
+            height: 100vh;
+            width: 100vw;
         }
         
         .font-modern { font-family: 'Montserrat', sans-serif; }
         .text-gold { color: #C1A68D; }
 
-        /* Fundo Fixo Otimizado */
+        /* Fundo Fixo Otimizado - Use nomes idênticos aos arquivos no GitHub */
         .fixed-background {
             position: fixed;
             top: 0;
@@ -40,15 +41,15 @@
             background-color: #050505;
             background-image: url('VIOLAO.jpg');
             background-repeat: no-repeat;
-            /* MOBILE: Zoom de 180% e rosto a 90% horizontal, 30% vertical */
+            /* MOBILE CONFIG */
             background-size: 180% auto; 
-            background-position: 90% 30%; 
+            background-position: 40% 9%; 
         }
 
         @media (min-width: 1025px) {
             .fixed-background {
                 background-image: url('Caete-47.jpg');
-                /* PC: Configuração Ideal conforme solicitado */
+                /* PC CONFIG IDEAL */
                 background-size: 115% auto; 
                 background-position: 1% 20%; 
             }
@@ -62,25 +63,34 @@
             pointer-events: none;
         }
 
-        /* Rodapé Dinâmico */
+        /* Rodapé Mobile Ajustado (Não sobrepõe o quadro branco) */
         .mobile-footer {
-            height: 140px;
-            padding-top: 1rem;
-            padding-bottom: 1rem;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100px;
+            z-index: 20;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 1.5rem;
         }
 
         @media (min-width: 1025px) {
             .mobile-footer {
                 height: 40px;
-                padding-top: 0;
-                padding-bottom: 0;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                background: black;
             }
         }
 
         /* Viewport do Carrossel */
         .carousel-viewport {
             width: 100vw;
-            height: calc(100vh - 64px - 140px); 
+            height: calc(100vh - 64px - 100px); 
             margin-top: 64px;
             overflow: hidden;
             position: relative;
@@ -92,7 +102,6 @@
             }
         }
 
-        /* Fita do Carrossel */
         .horizontal-scroll-wrapper {
             display: flex;
             width: 600vw;
@@ -110,24 +119,17 @@
             justify-content: center;
         }
 
-        /* Ajuste do Hero (Início) */
         .section-hero { 
             justify-content: flex-start !important; 
-            padding-left: 6vw;
+            padding-left: 8vw;
         }
 
-        @media (min-width: 1025px) {
-            .section-hero {
-                padding-left: 10vw;
-            }
-        }
-
-        /* Janela Ultra-Responsiva */
+        /* Janelas brancas de conteúdo */
         .app-window {
             background-color: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(15px);
-            width: 90%; 
-            height: 94%;
+            width: 88%; 
+            height: 90%;
             border-radius: 2px;
             position: relative;
             display: flex;
@@ -139,20 +141,20 @@
         }
 
         @media (min-width: 1025px) {
-            .app-window { width: 80%; height: 90%; padding: 3rem; }
+            .app-window { width: 80%; height: 85%; padding: 3rem; }
         }
 
-        /* Botões Laterais */
+        /* Botões de Slide - FORA das janelas */
         .nav-side-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
             transition: all 0.4s ease;
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -163,46 +165,21 @@
         }
 
         .nav-side-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.25);
             border-color: #C1A68D;
             color: #C1A68D;
         }
 
-        .btn-prev { left: 10px; }
-        .btn-next { right: 10px; }
+        .btn-prev { left: 8px; }
+        .btn-next { right: 8px; }
 
         @media (min-width: 1025px) {
             .nav-side-btn { width: 54px; height: 54px; }
-            .btn-prev { left: 2.5vw; }
-            .btn-next { right: 2.5vw; }
+            .btn-prev { left: 2vw; }
+            .btn-next { right: 2vw; }
         }
 
-        /* Modal de Contato Estilo Janela */
-        #contact-modal {
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .modal-window {
-            background-color: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
-            width: 90%;
-            max-width: 450px;
-            padding: 2.5rem;
-            border-radius: 2px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-            color: #1a1a1a;
-            position: relative;
-        }
-
-        #nav-controls {
-            transition: opacity 0.3s ease;
-        }
-
-        .menu-divider {
-            width: 1px;
-            height: 14px;
-            background-color: rgba(0,0,0,0.15);
-        }
+        #contact-modal { transition: all 0.4s ease; }
     </style>
 </head>
 <body class="antialiased">
@@ -213,210 +190,157 @@
     <!-- Navegação Superior -->
     <nav id="navbar" class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md h-[64px] border-b border-gray-100">
         <div class="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-6 h-full relative">
-            
-            <div id="nav-controls" class="flex justify-start items-center gap-3 z-20 w-1/4">
-                <button id="mobile-menu-btn" class="text-black text-lg md:text-xl p-2 focus:outline-none hover:text-gold transition">
+            <div class="flex justify-start items-center gap-3 z-20 w-1/4">
+                <button id="mobile-menu-btn" class="text-black text-lg focus:outline-none hover:text-gold transition">
                     <i class="fa-solid fa-bars-staggered"></i>
                 </button>
-                <div class="menu-divider hidden md:block"></div>
                 <span id="page-label" class="font-modern text-[10px] tracking-[0.3em] text-gray-400 uppercase hidden md:inline">Início</span>
             </div>
 
             <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-auto flex justify-center z-10 pointer-events-none">
-                <h1 class="font-modern text-[13px] md:text-xl font-semibold md:font-light tracking-[0.25em] md:tracking-[0.5em] text-black uppercase cursor-pointer pointer-events-auto whitespace-nowrap" onclick="scrollToSection(0)">
+                <h1 class="font-modern text-[13px] md:text-xl font-semibold tracking-[0.3em] text-black uppercase cursor-pointer pointer-events-auto whitespace-nowrap" onclick="scrollToSection(0)">
                     Caeté Preto
                 </h1>
             </div>
 
             <div class="flex justify-end gap-3 md:gap-5 text-black z-20 w-1/4 text-sm md:text-base items-center">
-                <!-- Ícone de Email no Menu Superior -->
-                <button onclick="toggleContactModal(true)" class="hover:text-gold transition-colors text-lg focus:outline-none">
-                    <i class="fa-regular fa-envelope"></i>
-                </button>
+                <button onclick="toggleContactModal(true)" class="hover:text-gold transition-colors text-lg"><i class="fa-regular fa-envelope"></i></button>
                 <a href="https://open.spotify.com/intl-pt/artist/317xnWeeSoyuG85KriAKpy" target="_blank" class="hover:text-gold transition-colors"><i class="fa-brands fa-spotify"></i></a>
                 <a href="https://www.instagram.com/caetepreto" target="_blank" class="hover:text-gold transition-colors"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://wa.me/5541984560993" target="_blank" class="hover:text-gold transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
             </div>
         </div>
     </nav>
 
-    <!-- Fundo escuro do Menu Lateral -->
+    <!-- Fundo Menu Lateral -->
     <div id="menu-backdrop" class="fixed inset-0 bg-black/40 z-[55] opacity-0 invisible transition-all duration-500" onclick="toggleMobileMenu(false)"></div>
 
     <!-- Menu Lateral -->
     <div id="mobile-overlay" class="fixed inset-y-0 left-0 w-64 md:w-80 bg-white z-[60] transform -translate-x-full transition-transform duration-500 ease-out flex flex-col justify-center px-10 text-black">
         <button id="close-mobile-btn" class="absolute top-6 left-6 text-2xl text-gray-300 hover:text-black transition focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
-        
         <ul class="flex flex-col items-start gap-8 text-sm md:text-md tracking-[0.4em] font-light uppercase font-modern w-full">
-            <li><a href="#" class="group flex items-center gap-3 hover:text-gold transition" onclick="scrollToSection(0)"><span class="w-0 group-hover:w-4 h-[1px] bg-gold transition-all"></span>Início</a></li>
-            <li><a href="#" class="group flex items-center gap-3 hover:text-gold transition" onclick="scrollToSection(1)"><span class="w-0 group-hover:w-4 h-[1px] bg-gold transition-all"></span>O Músico</a></li>
-            <li><a href="#" class="group flex items-center gap-3 hover:text-gold transition" onclick="scrollToSection(2)"><span class="w-0 group-hover:w-4 h-[1px] bg-gold transition-all"></span>Shows</a></li>
-            <li><a href="#" class="group flex items-center gap-3 hover:text-gold transition" onclick="scrollToSection(3)"><span class="w-0 group-hover:w-4 h-[1px] bg-gold transition-all"></span>Galeria</a></li>
-            <li><a href="#" class="group flex items-center gap-3 hover:text-gold transition" onclick="scrollToSection(4)"><span class="w-0 group-hover:w-4 h-[1px] bg-gold transition-all"></span>Bio</a></li>
-            <li><a href="#" class="group flex items-center gap-3 hover:text-gold transition" onclick="scrollToSection(5)"><span class="w-0 group-hover:w-4 h-[1px] bg-gold transition-all"></span>Contato</a></li>
+            <li><a href="#" onclick="scrollToSection(0)">Início</a></li>
+            <li><a href="#" onclick="scrollToSection(1)">O Músico</a></li>
+            <li><a href="#" onclick="scrollToSection(2)">Shows</a></li>
+            <li><a href="#" onclick="scrollToSection(3)">Galeria</a></li>
+            <li><a href="#" onclick="scrollToSection(4)">Bio</a></li>
+            <li><a href="#" onclick="scrollToSection(5)">Contato</a></li>
         </ul>
     </div>
 
-    <!-- Modal de Contrato / Janela Central Pequena -->
+    <!-- Modal Contato -->
     <div id="contact-modal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 invisible">
-        <!-- Backdrop do Modal -->
         <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="toggleContactModal(false)"></div>
-        <!-- Janela do Modal -->
-        <div class="modal-window flex flex-col items-center text-center">
-            <button onclick="toggleContactModal(false)" class="absolute top-4 right-4 text-gray-400 hover:text-black transition"><i class="fa-solid fa-times"></i></button>
-            <h3 class="font-modern text-lg md:text-xl font-light tracking-[0.4em] uppercase mb-8">Contratações</h3>
-            <div class="space-y-6 w-full">
-                <div>
-                    <label class="text-[9px] uppercase tracking-[0.3em] font-bold text-gold-dark mb-1 block">E-mail</label>
-                    <p class="font-modern text-sm md:text-md tracking-wider">contato@caetepreto.com.br</p>
-                </div>
-                <div>
-                    <label class="text-[9px] uppercase tracking-[0.3em] font-bold text-gold-dark mb-1 block">WhatsApp</label>
-                    <p class="font-modern text-sm md:text-md tracking-widest">+55 41 98456-0993</p>
-                </div>
-                <div class="pt-4">
-                    <a href="https://wa.me/5541984560993" target="_blank" class="inline-block bg-black text-white px-8 py-3 text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-gold transition-all rounded-xs w-full">Enviar Mensagem</a>
-                </div>
-            </div>
+        <div class="bg-white p-10 rounded-sm text-center text-black z-10 w-full max-w-sm mx-4">
+            <h3 class="font-modern tracking-[0.4em] uppercase mb-6 text-lg">Contratações</h3>
+            <p class="text-sm tracking-widest mb-2 font-light">contato@caetepreto.com.br</p>
+            <p class="text-sm tracking-widest mb-8 font-light">+55 41 98456-0993</p>
+            <a href="https://wa.me/5541984560993" target="_blank" class="block bg-black text-white py-4 uppercase text-[10px] tracking-[0.3em] font-bold hover:bg-gold transition-all">WhatsApp</a>
         </div>
     </div>
 
-    <!-- Viewport do Carrossel Horizontal -->
+    <!-- Carrossel -->
     <div class="carousel-viewport">
         <main class="horizontal-scroll-wrapper" id="mainScroll">
             
             <!-- 0: INÍCIO -->
             <section class="section section-hero">
-                <div class="relative flex flex-col text-left max-w-2xl">
-                    <h2 class="font-modern text-5xl md:text-7xl lg:text-[6rem] font-light text-white tracking-[0.15em] leading-[1.1] mb-3 md:mb-5 drop-shadow-lg">
-                        CAETÉ<br>PRETO
-                    </h2>
-                    <p class="font-modern text-xs md:text-lg font-light text-gold tracking-[0.2em] md:tracking-[0.4em] uppercase leading-relaxed drop-shadow-md">
-                        Músico. Compositor.<br>MPB & Bossa Nova.
-                    </p>
+                <div class="relative flex flex-col text-left">
+                    <h2 class="font-modern text-5xl md:text-7xl lg:text-[6rem] font-light text-white tracking-[0.15em] leading-[1.1] mb-5 drop-shadow-lg">CAETÉ<br>PRETO</h2>
+                    <p class="font-modern text-xs md:text-lg font-light text-gold tracking-[0.4em] uppercase drop-shadow-md">Músico. Compositor.<br>MPB & Bossa Nova.</p>
                 </div>
-                <button onclick="scrollToSection(1)" class="nav-side-btn btn-next">
-                    <i class="fa-solid fa-chevron-right text-sm"></i>
-                </button>
+                <button onclick="scrollToSection(1)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right"></i></button>
             </section>
 
             <!-- 1: O MÚSICO -->
-            <section class="section section-content">
-                <button onclick="scrollToSection(0)" class="nav-side-btn btn-prev">
-                    <i class="fa-solid fa-chevron-left text-sm"></i>
-                </button>
+            <section class="section">
+                <button onclick="scrollToSection(0)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
                 <div class="app-window" style="padding: 0; overflow: hidden;">
                     <div class="w-full h-[87.5%] bg-black relative">
                         <video id="intro-video" src="INTRO.mp4" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
-                        <button id="unmute-btn" class="absolute bottom-4 right-4 bg-white/20 backdrop-blur-md hover:bg-white/40 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all z-20 border border-white/10" title="Ativar Som">
+                        <button id="unmute-btn" class="absolute bottom-4 right-4 bg-white/20 backdrop-blur-md text-white w-10 h-10 rounded-full flex items-center justify-center border border-white/10 z-20">
                             <i class="fa-solid fa-volume-xmark" id="mute-icon"></i>
                         </button>
                     </div>
                     <div class="w-full h-[12.5%] flex flex-col items-center justify-center bg-white">
-                        <h3 class="font-modern text-sm md:text-lg font-light tracking-[0.3em] uppercase">O Músico</h3>
-                        <p class="font-modern text-gray-400 text-[8px] md:text-[10px] tracking-[0.2em] uppercase px-4 text-center">Uma jornada plural pela MPB e Bossa Nova, traduzindo paixões e as saudades da vida.</p>
+                        <h3 class="font-modern text-[10px] md:text-sm font-bold tracking-[0.3em] uppercase">O Músico</h3>
+                        <p class="font-modern text-gray-400 text-[8px] md:text-[9px] tracking-[0.1em] px-4 text-center">Uma jornada plural pela MPB e Bossa Nova, traduzindo paixões e as saudades da vida.</p>
                     </div>
                 </div>
-                <button onclick="scrollToSection(2)" class="nav-side-btn btn-next">
-                    <i class="fa-solid fa-chevron-right text-sm"></i>
-                </button>
+                <button onclick="scrollToSection(2)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right"></i></button>
             </section>
 
             <!-- 2: SHOWS -->
-            <section class="section section-content">
-                <button onclick="scrollToSection(1)" class="nav-side-btn btn-prev">
-                    <i class="fa-solid fa-chevron-left text-sm"></i>
-                </button>
+            <section class="section">
+                <button onclick="scrollToSection(1)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
                 <div class="app-window">
                     <h3 class="font-modern text-xl md:text-3xl text-center font-light tracking-[0.4em] uppercase mb-10">Agenda</h3>
-                    <div class="space-y-6 max-w-xl mx-auto w-full overflow-y-auto px-4">
-                        <div class="border-b border-gray-100 pb-5 flex justify-between items-center group">
-                            <div class="flex flex-col">
-                                <span class="text-[9px] font-bold text-gold tracking-widest">15 NOV 2026</span>
-                                <span class="font-modern font-light text-sm tracking-wide uppercase mt-1">Sesc Pinheiros - SP</span>
-                            </div>
-                            <a href="#" class="text-[8px] font-bold border border-black px-5 py-2 hover:bg-black hover:text-white transition uppercase tracking-[0.2em]">Tickets</a>
+                    <div class="space-y-6 max-w-xl mx-auto w-full">
+                        <div class="border-b border-gray-100 pb-5 flex justify-between items-center">
+                            <div class="flex flex-col"><span class="text-[9px] font-bold text-gold tracking-widest">15 NOV 2026</span><span class="text-sm font-light uppercase mt-1">Sesc Pinheiros - SP</span></div>
+                            <a href="#" class="text-[8px] font-bold border border-black px-4 py-2 hover:bg-black hover:text-white transition tracking-[0.2em] uppercase">Tickets</a>
                         </div>
-                        <div class="border-b border-gray-100 pb-5 flex justify-between items-center group">
-                            <div class="flex flex-col">
-                                <span class="text-[9px] font-bold text-gold tracking-widest">02 DEZ 2026</span>
-                                <span class="font-modern font-light text-sm tracking-wide uppercase mt-1">Teatro Municipal - CTBA</span>
-                            </div>
-                            <a href="#" class="text-[8px] font-bold border border-black px-5 py-2 hover:bg-black hover:text-white transition uppercase tracking-[0.2em]">Tickets</a>
+                        <div class="border-b border-gray-100 pb-5 flex justify-between items-center">
+                            <div class="flex flex-col"><span class="text-[9px] font-bold text-gold tracking-widest">02 DEZ 2026</span><span class="text-sm font-light uppercase mt-1">Teatro Municipal - CTBA</span></div>
+                            <a href="#" class="text-[8px] font-bold border border-black px-4 py-2 hover:bg-black hover:text-white transition tracking-[0.2em] uppercase">Tickets</a>
                         </div>
                     </div>
                 </div>
-                <button onclick="scrollToSection(3)" class="nav-side-btn btn-next">
-                    <i class="fa-solid fa-chevron-right text-sm"></i>
-                </button>
+                <button onclick="scrollToSection(3)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right"></i></button>
             </section>
 
             <!-- 3: GALERIA -->
-            <section class="section section-content">
-                <button onclick="scrollToSection(2)" class="nav-side-btn btn-prev">
-                    <i class="fa-solid fa-chevron-left text-sm"></i>
-                </button>
+            <section class="section">
+                <button onclick="scrollToSection(2)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
                 <div class="app-window">
                     <h3 class="font-modern text-xl md:text-3xl text-center font-light tracking-[0.4em] uppercase mb-10">Galeria</h3>
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 flex-grow overflow-y-auto px-4">
-                        <img src="Caete-4.jpg" alt="Caeté Preto" class="aspect-square object-cover rounded-xs transition-opacity hover:opacity-80">
-                        <img src="Caete-21.jpg" alt="Caeté Preto" class="aspect-square object-cover rounded-xs transition-opacity hover:opacity-80">
-                        <img src="Caete-28.jpg" alt="Caeté Preto" class="aspect-square object-cover rounded-xs transition-opacity hover:opacity-80">
-                        <img src="Caete-33.jpg" alt="Caeté Preto" class="aspect-square object-cover rounded-xs transition-opacity hover:opacity-80">
-                        <img src="Caete-44.jpg" alt="Caeté Preto" class="aspect-square object-cover rounded-xs transition-opacity hover:opacity-80">
-                        <img src="Caete-47.jpg" alt="Caeté Preto" class="aspect-square object-cover rounded-xs transition-opacity hover:opacity-80">
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 flex-grow overflow-y-auto px-1">
+                        <img src="Caete-4.jpg" class="aspect-square object-cover rounded-xs hover:opacity-80 transition">
+                        <img src="Caete-21.jpg" class="aspect-square object-cover rounded-xs hover:opacity-80 transition">
+                        <img src="Caete-28.jpg" class="aspect-square object-cover rounded-xs hover:opacity-80 transition">
+                        <img src="Caete-33.jpg" class="aspect-square object-cover rounded-xs hover:opacity-80 transition">
+                        <img src="Caete-44.jpg" class="aspect-square object-cover rounded-xs hover:opacity-80 transition">
+                        <img src="Caete-47.jpg" class="aspect-square object-cover rounded-xs hover:opacity-80 transition">
                     </div>
                 </div>
-                <button onclick="scrollToSection(4)" class="nav-side-btn btn-next">
-                    <i class="fa-solid fa-chevron-right text-sm"></i>
-                </button>
+                <button onclick="scrollToSection(4)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right"></i></button>
             </section>
 
-            <!-- 4: BIO (Texto de História Atualizado) -->
-            <section class="section section-content">
-                <button onclick="scrollToSection(3)" class="nav-side-btn btn-prev">
-                    <i class="fa-solid fa-chevron-left text-sm"></i>
-                </button>
+            <!-- 4: BIO -->
+            <section class="section">
+                <button onclick="scrollToSection(3)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
                 <div class="app-window">
                     <h3 class="font-modern text-xl md:text-3xl text-center font-light tracking-[0.4em] uppercase mb-10">História</h3>
-                    <div class="flex-grow flex items-center justify-center px-6 md:px-10">
+                    <div class="flex-grow flex items-center justify-center px-4 md:px-10">
                         <p class="font-modern font-light text-sm md:text-lg text-gray-600 leading-[1.8] text-center max-w-2xl italic">
                             Com mais de 30 anos de estrada, Caeté Preto é a voz que traduz a pluralidade da MPB e da Bossa Nova. Seu repertório reverencia mestres como Noel Rosa, Tom Jobim e Cartola, atravessando fronteiras geográficas e linguísticas para tocar a alma humana. Para ele, a música não tem limites: é um manifesto apaixonado sobre as dores, os amores, as chegadas e as saudades que nos tornam vivos.
                         </p>
                     </div>
                 </div>
-                <button onclick="scrollToSection(5)" class="nav-side-btn btn-next">
-                    <i class="fa-solid fa-chevron-right text-sm"></i>
-                </button>
+                <button onclick="scrollToSection(5)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right"></i></button>
             </section>
 
-            <!-- 5: CONTATO (Título Ajustado) -->
-            <section class="section section-content">
-                <button onclick="scrollToSection(4)" class="nav-side-btn btn-prev">
-                    <i class="fa-solid fa-chevron-left text-sm"></i>
-                </button>
+            <!-- 5: CONTATO -->
+            <section class="section">
+                <button onclick="scrollToSection(4)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
                 <div class="app-window flex flex-col items-center justify-center text-center">
                     <h3 class="font-modern text-xl md:text-3xl font-light tracking-[0.4em] uppercase mb-8">Contato</h3>
                     <p class="font-modern text-sm md:text-lg font-light text-gray-500 tracking-wider">contato@caetepreto.com.br</p>
                     <p class="font-modern text-sm md:text-lg font-light mt-3 tracking-[0.2em]">+55 41 98456-0993</p>
-                    <a href="https://wa.me/5541984560993" target="_blank" class="mt-10 bg-black text-white px-12 py-4 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.4em] hover:bg-gold transition-all rounded-xs w-full max-w-xs text-center">WhatsApp</a>
+                    <a href="https://wa.me/5541984560993" target="_blank" class="mt-10 bg-black text-white px-10 py-4 text-[10px] font-bold uppercase tracking-[0.4em] hover:bg-gold transition-all rounded-xs w-full max-w-xs">WhatsApp</a>
                 </div>
             </section>
 
         </main>
     </div>
 
-    <!-- Rodapé -->
-    <footer class="bg-black text-gray-400 fixed bottom-0 w-full z-20 flex flex-col md:flex-row items-center justify-center md:justify-between px-6 md:px-8 mobile-footer transition-all">
-        <div class="w-full flex flex-wrap justify-center gap-x-6 gap-y-3 mb-4 md:hidden text-center font-modern text-[10px] tracking-[0.2em] uppercase">
-            <a href="#" onclick="scrollToSection(0)" class="hover:text-white transition">Início</a>
-            <a href="#" onclick="scrollToSection(1)" class="hover:text-white transition">O Músico</a>
-            <a href="#" onclick="scrollToSection(2)" class="hover:text-white transition">Shows</a>
-            <a href="#" onclick="scrollToSection(3)" class="hover:text-white transition">Galeria</a>
-            <a href="#" onclick="scrollToSection(4)" class="hover:text-white transition">Bio</a>
-            <a href="#" onclick="scrollToSection(5)" class="hover:text-white transition">Contato</a>
+    <!-- Rodapé Minimalista -->
+    <footer class="mobile-footer">
+        <div class="flex justify-center gap-6 text-[9px] tracking-widest uppercase text-gray-400 mb-4 md:mb-0">
+            <span class="cursor-pointer" onclick="scrollToSection(0)">Início</span>
+            <span class="cursor-pointer" onclick="scrollToSection(1)">O Músico</span>
+            <span class="cursor-pointer" onclick="scrollToSection(5)">Contato</span>
         </div>
-        <div class="w-full flex justify-between items-center text-[7px] tracking-[0.4em] font-light uppercase">
+        <div class="flex justify-between items-center text-[7px] tracking-[0.4em] font-light uppercase text-gray-600">
             <span>Curitiba | Rio de Janeiro</span>
             <span>© 2026 Caeté Preto</span>
         </div>
@@ -426,103 +350,60 @@
         const scrollWrapper = document.getElementById('mainScroll');
         const mobileOverlay = document.getElementById('mobile-overlay');
         const menuBackdrop = document.getElementById('menu-backdrop');
-        const navControls = document.getElementById('nav-controls');
-        const pageLabel = document.getElementById('page-label');
         const contactModal = document.getElementById('contact-modal');
+        const pageLabel = document.getElementById('page-label');
         const introVideo = document.getElementById('intro-video');
-        const unmuteBtn = document.getElementById('unmute-btn');
         const muteIcon = document.getElementById('mute-icon');
 
-        const sectionNames = ["Início", "O Músico", "Shows", "Galeria", "Bio", "Contato"];
-        const totalSections = sectionNames.length;
         let currentIndex = 0;
+        const totalSections = 6;
+        const sectionNames = ["Início", "O Músico", "Shows", "Galeria", "Bio", "Contato"];
 
         function scrollToSection(index) {
             if (index < 0 || index >= totalSections) return;
             currentIndex = index;
             scrollWrapper.style.transform = `translateX(-${index * 100}vw)`;
-            updateNavLabel(index);
-            toggleMobileMenu(false); 
+            if(pageLabel) pageLabel.textContent = sectionNames[index];
+            toggleMobileMenu(false);
         }
-
-        function updateNavLabel(index) {
-            navControls.style.opacity = '0';
-            setTimeout(() => {
-                if (sectionNames[index]) {
-                    pageLabel.textContent = sectionNames[index];
-                }
-                navControls.style.opacity = '1';
-            }, 300);
-        }
-
-        function toggleContactModal(show) {
-            if (show) {
-                contactModal.classList.remove('invisible', 'opacity-0');
-                contactModal.classList.add('visible', 'opacity-100');
-            } else {
-                contactModal.classList.add('invisible', 'opacity-0');
-                contactModal.classList.remove('visible', 'opacity-100');
-            }
-        }
-
-        unmuteBtn.addEventListener('click', () => {
-            if (introVideo.muted) {
-                introVideo.muted = false;
-                muteIcon.classList.remove('fa-volume-xmark');
-                muteIcon.classList.add('fa-volume-high');
-                unmuteBtn.title = "Desativar Som";
-            } else {
-                introVideo.muted = true;
-                muteIcon.classList.add('fa-volume-xmark');
-                muteIcon.classList.remove('fa-volume-high');
-                unmuteBtn.title = "Ativar Som";
-            }
-        });
-
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        scrollWrapper.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, {passive: true});
-
-        scrollWrapper.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        }, {passive: true});
-
-        function handleSwipe() {
-            const swipeThreshold = 50; 
-            if (touchStartX - touchEndX > swipeThreshold) {
-                scrollToSection(currentIndex + 1); 
-            }
-            if (touchEndX - touchStartX > swipeThreshold) {
-                scrollToSection(currentIndex - 1); 
-            }
-        }
-
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight') scrollToSection(currentIndex + 1);
-            if (e.key === 'ArrowLeft') scrollToSection(currentIndex - 1);
-            if (e.key === 'Escape') toggleContactModal(false);
-        });
 
         function toggleMobileMenu(show) {
             if (show) {
                 mobileOverlay.classList.remove('-translate-x-full');
                 menuBackdrop.classList.remove('invisible', 'opacity-0');
                 menuBackdrop.classList.add('visible', 'opacity-100');
-                document.body.style.overflow = 'hidden';
             } else {
                 mobileOverlay.classList.add('-translate-x-full');
                 menuBackdrop.classList.add('invisible', 'opacity-0');
-                menuBackdrop.classList.remove('visible', 'opacity-100');
-                document.body.style.overflow = '';
             }
         }
 
+        function toggleContactModal(show) {
+            contactModal.style.opacity = show ? "1" : "0";
+            contactModal.style.visibility = show ? "visible" : "hidden";
+        }
+
+        document.getElementById('unmute-btn').addEventListener('click', () => {
+            introVideo.muted = !introVideo.muted;
+            muteIcon.className = introVideo.muted ? 'fa-solid fa-volume-xmark' : 'fa-solid fa-volume-high';
+        });
+
         document.getElementById('mobile-menu-btn').addEventListener('click', () => toggleMobileMenu(true));
         document.getElementById('close-mobile-btn').addEventListener('click', () => toggleMobileMenu(false));
+
+        // Touch Swipe
+        let startX = 0;
+        scrollWrapper.addEventListener('touchstart', e => startX = e.touches[0].clientX, {passive:true});
+        scrollWrapper.addEventListener('touchend', e => {
+            const diff = startX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) scrollToSection(currentIndex + (diff > 0 ? 1 : -1));
+        }, {passive:true});
+
+        window.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight') scrollToSection(currentIndex + 1);
+            if (e.key === 'ArrowLeft') scrollToSection(currentIndex - 1);
+            if (e.key === 'Escape') toggleContactModal(false);
+        });
     </script>
 </body>
 </html>
