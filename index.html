@@ -126,6 +126,8 @@
             overflow: hidden;
             color: #1a1a1a;
             z-index: 10;
+            /* Força o Safari a respeitar o border-radius ao redor da animação 3D */
+            transform: translateZ(0);
         }
 
         @media (min-width: 1025px) {
@@ -239,7 +241,8 @@
         <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="toggleContactModal(false)"></div>
         <div class="bg-white p-10 rounded-sm text-center text-black z-10 w-full max-w-sm mx-4 shadow-2xl">
             <h3 class="font-modern tracking-[0.4em] uppercase mb-6 text-lg">Contratações</h3>
-            <p class="text-sm tracking-widest mb-2 font-light">contato@caetepreto.com.br</p>
+            <p class="font-modern text-[8px] md:text-[9px] text-gray-400 uppercase tracking-widest mb-1">E-mail</p>
+            <p class="text-sm tracking-widest mb-4 font-light">contato@caetepreto.com.br</p>
             <p class="text-sm tracking-widest mb-8 font-light">+55 41 98456-0993</p>
             <a href="https://wa.me/5541984560993" target="_blank" class="block bg-black text-white py-4 uppercase text-[10px] tracking-[0.3em] font-bold hover:bg-gold transition-all">WhatsApp</a>
         </div>
@@ -280,13 +283,15 @@
             <section class="section">
                 <button onclick="scrollToSection(1)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
                 <div class="app-window">
+                    
                     <!-- Overlay de Animação: Tributo a Tom Jobim (Estilo Livro/Folheto Abrindo) -->
-                    <div id="tribute-overlay" class="absolute inset-0 z-[60] flex opacity-0 pointer-events-none" style="perspective: 2000px;">
-                        <!-- Lombada Fixa -->
-                        <div class="w-[15px] md:w-[20px] h-full bg-gradient-to-r from-white to-gray-50 border-r border-gray-200 z-20 flex-shrink-0"></div>
-                        <!-- Capa Animada -->
-                        <div id="tribute-cover" class="flex-1 h-full bg-white origin-left flex items-center justify-center z-10 relative">
-                            <h2 class="font-modern text-lg md:text-3xl text-black uppercase tracking-[0.3em] font-light text-center px-4 leading-relaxed absolute left-0 right-0 -ml-[15px] md:-ml-[20px]">Tributo a<br>Tom Jobim</h2>
+                    <!-- Posicionado com absolute para evitar os bugs de renderização do Safari com Flexbox -->
+                    <div id="tribute-overlay" class="absolute inset-0 z-[60] opacity-0 pointer-events-none" style="perspective: 2000px;">
+                        <!-- Lombada Fixa - "Vaza" 2px pra esquerda (-left-[2px]) para garantir que cubra qualquer fresta transparente no Safari -->
+                        <div class="absolute -left-[2px] top-0 bottom-0 w-[18px] md:w-[22px] bg-gradient-to-r from-white to-gray-50 border-r border-gray-200 z-20"></div>
+                        <!-- Capa Animada - Sobrepõe a lombada em 1px (left-[16px]) para impedir sub-pixels transparentes -->
+                        <div id="tribute-cover" class="absolute left-[16px] md:left-[20px] right-0 top-0 bottom-0 bg-white origin-left flex items-center justify-center z-10">
+                            <h2 class="font-modern text-lg md:text-3xl text-black uppercase tracking-[0.3em] font-light text-center px-4 leading-relaxed absolute left-0 right-0 -ml-[16px] md:-ml-[20px]">Tributo a<br>Tom Jobim</h2>
                         </div>
                     </div>
 
@@ -394,8 +399,9 @@
                 <button onclick="scrollToSection(7)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
                 <div class="app-window flex flex-col items-center justify-center text-center p-6">
                     <h3 class="font-modern text-xl md:text-3xl font-light tracking-[0.4em] uppercase mb-8">Contato</h3>
+                    <p class="font-modern text-[8px] md:text-[10px] text-gray-400 uppercase tracking-widest mb-1">E-mail</p>
                     <p class="font-modern text-sm md:text-lg font-light text-gray-500 tracking-wider">contato@caetepreto.com.br</p>
-                    <p class="font-modern text-sm md:text-lg font-light mt-3 tracking-[0.2em]">+55 41 98456-0993</p>
+                    <p class="font-modern text-sm md:text-lg font-light mt-4 tracking-[0.2em]">+55 41 98456-0993</p>
                     <a href="https://wa.me/5541984560993" target="_blank" class="mt-10 bg-black text-white px-10 py-4 text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-gold transition-all rounded-xs w-full max-w-xs">WhatsApp</a>
                 </div>
             </section>
