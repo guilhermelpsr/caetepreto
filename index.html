@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Caeté Preto - MPB & Bossa Nova</title>
+    <title>Caeté Pretô - MPB & Bossa Nova</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -58,8 +58,8 @@
             body { overflow: hidden; }
             .fixed-background {
                 background-image: url('Caete-47.jpg');
-                background-size: 120% auto; 
-                background-position: 5% 20%; 
+                background-size: 115% auto; 
+                background-position: 1% 20%; 
             }
         }
 
@@ -118,7 +118,7 @@
             background-color: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(15px);
             width: 88%; 
-            height: 82%; /* Diminuído de 90% para dar mais margem de segurança embaixo no iPad/iPhone */
+            height: 82%; /* Ajustado para iPad/Safari bottom bar */
             border-radius: 2px;
             position: relative;
             display: flex;
@@ -205,7 +205,7 @@
 
             <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-auto flex justify-center z-10 pointer-events-none">
                 <h1 class="font-modern text-[13px] md:text-xl font-semibold tracking-[0.3em] text-black uppercase cursor-pointer pointer-events-auto whitespace-nowrap" onclick="scrollToSection(0)">
-                    Caeté Preto
+                    Caeté Pretô
                 </h1>
             </div>
 
@@ -252,7 +252,7 @@
             <!-- 0: INÍCIO -->
             <section class="section section-hero">
                 <div class="relative flex flex-col text-left">
-                    <h2 class="font-modern text-5xl md:text-7xl lg:text-[6rem] font-light text-white tracking-[0.15em] leading-[1.1] mb-5 drop-shadow-lg">CAETÉ<br>PRETO</h2>
+                    <h2 class="font-modern text-5xl md:text-7xl lg:text-[6rem] font-light text-white tracking-[0.15em] leading-[1.1] mb-5 drop-shadow-lg">CAETÉ<br>PRETÔ</h2>
                     <p class="font-modern text-xs md:text-lg font-light text-gold tracking-[0.4em] uppercase drop-shadow-md">Músico. Compositor.<br>MPB & Bossa Nova.</p>
                 </div>
                 <button onclick="scrollToSection(1)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right"></i></button>
@@ -280,13 +280,12 @@
             <section class="section">
                 <button onclick="scrollToSection(1)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
                 <div class="app-window">
-                    <!-- Overlay de Animação: Tributo a Tom Jobim -->
+                    <!-- Overlay de Animação: Tributo a Tom Jobim (Estilo Livro/Folheto Abrindo) -->
                     <div id="tribute-overlay" class="absolute inset-0 z-[60] flex opacity-0 pointer-events-none" style="perspective: 2000px;">
-                        <!-- Lombada Fixa (Simula a margem do livro) -->
+                        <!-- Lombada Fixa -->
                         <div class="w-[15px] md:w-[20px] h-full bg-gradient-to-r from-white to-gray-50 border-r border-gray-200 z-20 flex-shrink-0"></div>
                         <!-- Capa Animada -->
                         <div id="tribute-cover" class="flex-1 h-full bg-white origin-left flex items-center justify-center z-10 relative">
-                            <!-- O texto tem uma leve margem negativa para manter o centro visual exato -->
                             <h2 class="font-modern text-lg md:text-3xl text-black uppercase tracking-[0.3em] font-light text-center px-4 leading-relaxed absolute left-0 right-0 -ml-[15px] md:-ml-[20px]">Tributo a<br>Tom Jobim</h2>
                         </div>
                     </div>
@@ -320,6 +319,7 @@
                         <p class="font-modern text-gray-500 text-[8px] md:text-[10px] tracking-[0.05em] text-center leading-[1.4] mt-2">
                             • Samba de Uma Nota Só - Tom Jobim e Newton Mendonça<br>
                             • Só Danço Samba - Tom Jobim e Vinícius de Moraes<br>
+                            • Doze Sambas - Caeté Pretô e Tatára<br>
                             • Carta ao Tom 74 - Toquinho e Vinícius de Moraes<br>
                             • Corcovado - Tom Jobim
                         </p>
@@ -383,7 +383,7 @@
                     <h3 class="font-modern text-xl md:text-3xl text-center font-light tracking-[0.4em] uppercase mb-10">História</h3>
                     <div class="flex-grow flex items-center justify-center">
                         <p class="font-modern font-light text-xs md:text-lg text-gray-600 leading-[1.8] text-center max-w-3xl italic">
-"Os mais de 30 anos de carreira transformaram Caeté Preto num guardião da pluralidade musical brasileira. Da síncope de Noel Rosa ao minimalismo de João Gilberto, a sua música é uma curadoria apaixonada das relações humanas. O seu violão carrega o legado de mestres como Cartola, Chico Buarque e Milton Nascimento, enquanto a sua voz percorre os caminhos traçados por Tom Jobim e Djavan. Um artista plural. Mais do que um músico, Caeté é a expressão viva da MPB e da Bossa Nova em constante movimento."                        </p>
+"Os mais de 30 anos de carreira transformaram Caeté Pretô num guardião da pluralidade musical brasileira. Da síncope de Noel Rosa ao minimalismo de João Gilberto, a sua música é uma curadoria apaixonada das relações humanas. O seu violão carrega o legado de mestres como Cartola, Chico Buarque e Milton Nascimento, enquanto a sua voz percorre os caminhos traçados por Tom Jobim e Djavan. Um artista plural. Mais do que um músico, Caeté é a expressão viva da MPB e da Bossa Nova em constante movimento."                        </p>
                     </div>
                 </div>
                 <button onclick="scrollToSection(8)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right"></i></button>
@@ -411,7 +411,7 @@
         </div>
         <div class="flex justify-between items-center text-[7px] tracking-[0.4em] font-light uppercase text-gray-600 px-2 md:px-0">
             <span>Curitiba | Rio de Janeiro</span>
-            <span>© 2026 Caeté Preto</span>
+            <span>© 2026 Caeté Pretô</span>
         </div>
     </footer>
 
@@ -426,7 +426,6 @@
         const totalSections = 9; 
         const sectionNames = ["Início", "O Músico", "Música I", "Música II", "Música III", "Agenda", "Galeria", "História", "Contato"];
 
-        // Função para controlar qual vídeo deve tocar e qual deve pausar
         function handleVideos(activeIndex) {
             const sections = document.querySelectorAll('.section');
             sections.forEach((section, idx) => {
@@ -452,23 +451,18 @@
                 const tributeOverlay = document.getElementById('tribute-overlay');
                 const tributeCover = document.getElementById('tribute-cover');
                 
-                // Remove qualquer transição anterior e exibe a tela sólida instantaneamente
                 tributeOverlay.style.transition = 'none';
                 tributeOverlay.style.opacity = '1';
                 
-                // Prepara a capa animada para começar fechada (0 graus)
                 tributeCover.style.transition = 'none';
                 tributeCover.style.transform = 'rotateY(0deg)';
                 
-                // Força o navegador a reconhecer as alterações acima antes de prosseguir
                 void tributeOverlay.offsetWidth;
                 
-                // Começa a transição 1 segundo após a rolagem lateral (0.6s + 1.0s = 1.6s)
                 setTimeout(() => {
                     tributeOverlay.style.transition = 'opacity 1.5s ease-in-out';
                     tributeOverlay.style.opacity = '0';
                     
-                    // Efeito "Abrindo a Capa": Gira apenas o corpo da página, lombada fica intacta
                     tributeCover.style.transition = 'transform 1.5s ease-in-out';
                     tributeCover.style.transform = 'rotateY(-110deg)';
                 }, 1600); 
@@ -480,7 +474,7 @@
             
             if(pageLabel) pageLabel.textContent = sectionNames[index];
             
-            handleVideos(index); // Aciona o controle de Play/Pause da aba ativa
+            handleVideos(index);
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
             toggleMobileMenu(false);
@@ -502,7 +496,6 @@
             contactModal.style.visibility = show ? "visible" : "hidden";
         }
 
-        // Lógica para múltiplos botões de mudo
         document.querySelectorAll('.unmute-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 const video = this.parentElement.querySelector('.video-player');
@@ -539,7 +532,6 @@
             if (e.key === 'Escape') toggleContactModal(false);
         });
 
-        // Garantir que a lógica de vídeo rode na inicialização
         document.addEventListener('DOMContentLoaded', () => {
             handleVideos(currentIndex);
         });
