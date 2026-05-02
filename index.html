@@ -21,16 +21,17 @@
             font-family: 'Inter', sans-serif;
             background-color: #000;
             color: #fff;
-            overflow: hidden;
+            /* No mobile permitimos o scroll vertical para revelar o rodapé no fim */
+            overflow-x: hidden;
+            overflow-y: auto;
             margin: 0;
-            height: 100vh;
-            width: 100vw;
+            min-height: 100vh;
         }
         
         .font-modern { font-family: 'Montserrat', sans-serif; }
         .text-gold { color: #C1A68D; }
 
-        /* Fundo Fixo Otimizado - Use nomes idênticos aos arquivos no GitHub */
+        /* Fundo Fixo Otimizado - Ocupa sempre o fundo independente do scroll do conteúdo */
         .fixed-background {
             position: fixed;
             top: 0;
@@ -41,15 +42,14 @@
             background-color: #050505;
             background-image: url('VIOLAO.jpg');
             background-repeat: no-repeat;
-            /* MOBILE CONFIG */
-            background-size: 180% auto; 
-            background-position: 40% 9%; 
+            background-size: cover;
+            background-position: center;
         }
 
         @media (min-width: 1025px) {
+            body { overflow: hidden; } /* No PC mantemos o estilo de tela única */
             .fixed-background {
                 background-image: url('Caete-47.jpg');
-                /* PC CONFIG IDEAL */
                 background-size: 115% auto; 
                 background-position: 1% 20%; 
             }
@@ -63,34 +63,37 @@
             pointer-events: none;
         }
 
-        /* Rodapé Mobile Ajustado (Não sobrepõe o quadro branco) */
+        /* Rodapé Mobile: Agora é relativo, empurrado para o fim da página */
         .mobile-footer {
-            position: absolute;
-            bottom: 0;
+            position: relative;
             width: 100%;
-            height: 100px;
+            height: 120px;
             z-index: 20;
-            background: rgba(0,0,0,0.9);
+            background: #000;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 0 1.5rem;
+            padding: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
 
         @media (min-width: 1025px) {
             .mobile-footer {
+                position: absolute;
+                bottom: 0;
                 height: 40px;
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
                 background: black;
+                padding: 0 2rem;
             }
         }
 
-        /* Viewport do Carrossel */
+        /* Viewport do Carrossel: No mobile ocupa a altura da tela menos a navbar */
         .carousel-viewport {
             width: 100vw;
-            height: calc(100vh - 64px - 100px); 
+            height: calc(100vh - 64px); 
             margin-top: 64px;
             overflow: hidden;
             position: relative;
@@ -124,27 +127,26 @@
             padding-left: 8vw;
         }
 
-        /* Janelas brancas de conteúdo */
+        /* Janelas de conteúdo ajustadas para não serem cortadas */
         .app-window {
             background-color: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(15px);
             width: 88%; 
-            height: 90%;
+            height: 92%;
             border-radius: 2px;
             position: relative;
             display: flex;
             flex-direction: column;
-            overflow-y: auto;
-            padding: 1.5rem;
+            overflow: hidden;
             color: #1a1a1a;
             z-index: 10;
         }
 
         @media (min-width: 1025px) {
-            .app-window { width: 80%; height: 85%; padding: 3rem; }
+            .app-window { width: 80%; height: 85%; padding: 0; }
         }
 
-        /* Botões de Slide - FORA das janelas */
+        /* Botões de Slide */
         .nav-side-btn {
             position: absolute;
             top: 50%;
@@ -162,12 +164,6 @@
             z-index: 50;
             color: white;
             cursor: pointer;
-        }
-
-        .nav-side-btn:hover {
-            background: rgba(255, 255, 255, 0.25);
-            border-color: #C1A68D;
-            color: #C1A68D;
         }
 
         .btn-prev { left: 8px; }
@@ -248,31 +244,31 @@
                     <h2 class="font-modern text-5xl md:text-7xl lg:text-[6rem] font-light text-white tracking-[0.15em] leading-[1.1] mb-5 drop-shadow-lg">CAETÉ<br>PRETO</h2>
                     <p class="font-modern text-xs md:text-lg font-light text-gold tracking-[0.4em] uppercase drop-shadow-md">Músico. Compositor.<br>MPB & Bossa Nova.</p>
                 </div>
-                <button onclick="scrollToSection(1)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right"></i></button>
+                <button onclick="scrollToSection(1)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right text-sm"></i></button>
             </section>
 
             <!-- 1: O MÚSICO -->
             <section class="section">
-                <button onclick="scrollToSection(0)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
-                <div class="app-window" style="padding: 0; overflow: hidden;">
+                <button onclick="scrollToSection(0)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left text-sm"></i></button>
+                <div class="app-window">
                     <div class="w-full h-[87.5%] bg-black relative">
                         <video id="intro-video" src="INTRO.mp4" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
                         <button id="unmute-btn" class="absolute bottom-4 right-4 bg-white/20 backdrop-blur-md text-white w-10 h-10 rounded-full flex items-center justify-center border border-white/10 z-20">
                             <i class="fa-solid fa-volume-xmark" id="mute-icon"></i>
                         </button>
                     </div>
-                    <div class="w-full h-[12.5%] flex flex-col items-center justify-center bg-white">
+                    <div class="w-full h-[12.5%] flex flex-col items-center justify-center bg-white px-2">
                         <h3 class="font-modern text-[10px] md:text-sm font-bold tracking-[0.3em] uppercase">O Músico</h3>
-                        <p class="font-modern text-gray-400 text-[8px] md:text-[9px] tracking-[0.1em] px-4 text-center">Uma jornada plural pela MPB e Bossa Nova, traduzindo paixões e as saudades da vida.</p>
+                        <p class="font-modern text-gray-400 text-[8px] md:text-[9px] tracking-[0.1em] text-center">Pluralidade da MPB traduzindo paixões e as saudades da vida.</p>
                     </div>
                 </div>
-                <button onclick="scrollToSection(2)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right"></i></button>
+                <button onclick="scrollToSection(2)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right text-sm"></i></button>
             </section>
 
             <!-- 2: SHOWS -->
             <section class="section">
-                <button onclick="scrollToSection(1)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
-                <div class="app-window">
+                <button onclick="scrollToSection(1)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left text-sm"></i></button>
+                <div class="app-window px-4 py-8 md:p-12">
                     <h3 class="font-modern text-xl md:text-3xl text-center font-light tracking-[0.4em] uppercase mb-10">Agenda</h3>
                     <div class="space-y-6 max-w-xl mx-auto w-full">
                         <div class="border-b border-gray-100 pb-5 flex justify-between items-center">
@@ -285,57 +281,57 @@
                         </div>
                     </div>
                 </div>
-                <button onclick="scrollToSection(3)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right"></i></button>
+                <button onclick="scrollToSection(3)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right text-sm"></i></button>
             </section>
 
             <!-- 3: GALERIA -->
             <section class="section">
-                <button onclick="scrollToSection(2)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
-                <div class="app-window">
+                <button onclick="scrollToSection(2)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left text-sm"></i></button>
+                <div class="app-window p-4 md:p-12">
                     <h3 class="font-modern text-xl md:text-3xl text-center font-light tracking-[0.4em] uppercase mb-10">Galeria</h3>
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 flex-grow overflow-y-auto px-1">
-                        <img src="Caete-4.jpg" class="aspect-square object-cover rounded-xs hover:opacity-80 transition">
-                        <img src="Caete-21.jpg" class="aspect-square object-cover rounded-xs hover:opacity-80 transition">
-                        <img src="Caete-28.jpg" class="aspect-square object-cover rounded-xs hover:opacity-80 transition">
-                        <img src="Caete-33.jpg" class="aspect-square object-cover rounded-xs hover:opacity-80 transition">
-                        <img src="Caete-44.jpg" class="aspect-square object-cover rounded-xs hover:opacity-80 transition">
-                        <img src="Caete-47.jpg" class="aspect-square object-cover rounded-xs hover:opacity-80 transition">
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2 flex-grow overflow-y-auto">
+                        <img src="Caete-4.jpg" class="aspect-square object-cover rounded-xs">
+                        <img src="Caete-21.jpg" class="aspect-square object-cover rounded-xs">
+                        <img src="Caete-28.jpg" class="aspect-square object-cover rounded-xs">
+                        <img src="Caete-33.jpg" class="aspect-square object-cover rounded-xs">
+                        <img src="Caete-44.jpg" class="aspect-square object-cover rounded-xs">
+                        <img src="Caete-47.jpg" class="aspect-square object-cover rounded-xs">
                     </div>
                 </div>
-                <button onclick="scrollToSection(4)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right"></i></button>
+                <button onclick="scrollToSection(4)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right text-sm"></i></button>
             </section>
 
             <!-- 4: BIO -->
             <section class="section">
-                <button onclick="scrollToSection(3)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
-                <div class="app-window">
+                <button onclick="scrollToSection(3)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left text-sm"></i></button>
+                <div class="app-window p-6 md:p-12">
                     <h3 class="font-modern text-xl md:text-3xl text-center font-light tracking-[0.4em] uppercase mb-10">História</h3>
-                    <div class="flex-grow flex items-center justify-center px-4 md:px-10">
-                        <p class="font-modern font-light text-sm md:text-lg text-gray-600 leading-[1.8] text-center max-w-2xl italic">
-                            Com mais de 30 anos de estrada, Caeté Preto é a voz que traduz a pluralidade da MPB e da Bossa Nova. Seu repertório reverencia mestres como Noel Rosa, Tom Jobim e Cartola, atravessando fronteiras geográficas e linguísticas para tocar a alma humana. Para ele, a música não tem limites: é um manifesto apaixonado sobre as dores, os amores, as chegadas e as saudades que nos tornam vivos.
+                    <div class="flex-grow flex items-center justify-center">
+                        <p class="font-modern font-light text-xs md:text-lg text-gray-600 leading-[1.8] text-center max-w-2xl italic">
+                            Com mais de 30 anos de estrada, Caeté Preto é a voz que traduz a pluralidade da MPB e da Bossa Nova. Seu repertório reverencia mestres como Noel Rosa e Tom Jobim, atravessando fronteiras para tocar a alma humana através das dores, amores e saudades que nos tornam vivos.
                         </p>
                     </div>
                 </div>
-                <button onclick="scrollToSection(5)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right"></i></button>
+                <button onclick="scrollToSection(5)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right text-sm"></i></button>
             </section>
 
             <!-- 5: CONTATO -->
             <section class="section">
-                <button onclick="scrollToSection(4)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
-                <div class="app-window flex flex-col items-center justify-center text-center">
+                <button onclick="scrollToSection(4)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left text-sm"></i></button>
+                <div class="app-window flex flex-col items-center justify-center text-center p-6">
                     <h3 class="font-modern text-xl md:text-3xl font-light tracking-[0.4em] uppercase mb-8">Contato</h3>
                     <p class="font-modern text-sm md:text-lg font-light text-gray-500 tracking-wider">contato@caetepreto.com.br</p>
                     <p class="font-modern text-sm md:text-lg font-light mt-3 tracking-[0.2em]">+55 41 98456-0993</p>
-                    <a href="https://wa.me/5541984560993" target="_blank" class="mt-10 bg-black text-white px-10 py-4 text-[10px] font-bold uppercase tracking-[0.4em] hover:bg-gold transition-all rounded-xs w-full max-w-xs">WhatsApp</a>
+                    <a href="https://wa.me/5541984560993" target="_blank" class="mt-10 bg-black text-white px-10 py-4 text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-gold transition-all rounded-xs w-full max-w-xs">WhatsApp</a>
                 </div>
             </section>
 
         </main>
     </div>
 
-    <!-- Rodapé Minimalista -->
+    <!-- Rodapé Minimalista: Agora aparece apenas após o fim da tela no Mobile -->
     <footer class="mobile-footer">
-        <div class="flex justify-center gap-6 text-[9px] tracking-widest uppercase text-gray-400 mb-4 md:mb-0">
+        <div class="flex justify-center gap-6 text-[9px] tracking-widest uppercase text-gray-400 mb-6 md:mb-0">
             <span class="cursor-pointer" onclick="scrollToSection(0)">Início</span>
             <span class="cursor-pointer" onclick="scrollToSection(1)">O Músico</span>
             <span class="cursor-pointer" onclick="scrollToSection(5)">Contato</span>
@@ -364,6 +360,9 @@
             currentIndex = index;
             scrollWrapper.style.transform = `translateX(-${index * 100}vw)`;
             if(pageLabel) pageLabel.textContent = sectionNames[index];
+            
+            // Ao trocar de seção, voltamos o scroll para o topo para esconder o rodapé
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             toggleMobileMenu(false);
         }
 
