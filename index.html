@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -29,7 +30,6 @@
             margin: 0;
             padding: 0;
             width: 100vw;
-            /* Impede o balanço lateral nativo do navegador */
             overflow-x: hidden; 
             overflow-y: auto;
             overscroll-behavior-x: none;
@@ -83,21 +83,20 @@
             .carousel-viewport { height: calc(100vh - 64px - 40px); }
         }
 
-        /* Fita do Carrossel - Estabilizada */
+        /* Fita do Carrossel */
         .horizontal-scroll-wrapper {
             display: flex;
-            width: 600vw; /* 6 seções de 100vw */
+            width: 900vw; 
             height: 100%;
             transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
             will-change: transform;
-            /* CRUCIAL: impede o telemóvel de tentar fazer scroll horizontal sozinho */
             touch-action: pan-y; 
         }
 
         .section {
             width: 100vw;
             height: 100%;
-            flex-shrink: 0; /* Impede que a seção encolha e cause desalinhamento */
+            flex-shrink: 0;
             position: relative;
             display: flex;
             align-items: center;
@@ -128,7 +127,6 @@
             .app-window { width: 80%; height: 85%; }
         }
 
-        /* Botões de Navegação Lateral */
         .nav-side-btn {
             position: absolute;
             top: 50%;
@@ -218,13 +216,16 @@
     <div id="menu-backdrop" class="fixed inset-0 bg-black/40 z-[55] opacity-0 invisible transition-all duration-500" onclick="toggleMobileMenu(false)"></div>
     <div id="mobile-overlay" class="fixed inset-y-0 left-0 w-64 md:w-80 bg-white z-[60] transform -translate-x-full transition-transform duration-500 ease-out flex flex-col justify-center px-10 text-black shadow-2xl">
         <button id="close-mobile-btn" class="absolute top-6 left-6 text-2xl text-gray-300 hover:text-black transition focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
-        <ul class="flex flex-col items-start gap-8 text-sm md:text-md tracking-[0.4em] font-light uppercase font-modern w-full">
+        <ul class="flex flex-col items-start gap-6 text-sm md:text-md tracking-[0.3em] font-light uppercase font-modern w-full">
             <li><a href="#" onclick="scrollToSection(0)">Início</a></li>
             <li><a href="#" onclick="scrollToSection(1)">O Músico</a></li>
-            <li><a href="#" onclick="scrollToSection(2)">Shows</a></li>
-            <li><a href="#" onclick="scrollToSection(3)">Galeria</a></li>
-            <li><a href="#" onclick="scrollToSection(4)">Bio</a></li>
-            <li><a href="#" onclick="scrollToSection(5)">Contato</a></li>
+            <li><a href="#" onclick="scrollToSection(2)">Música I</a></li>
+            <li><a href="#" onclick="scrollToSection(3)">Música II</a></li>
+            <li><a href="#" onclick="scrollToSection(4)">Música III</a></li>
+            <li><a href="#" onclick="scrollToSection(5)">Shows</a></li>
+            <li><a href="#" onclick="scrollToSection(6)">Galeria</a></li>
+            <li><a href="#" onclick="scrollToSection(7)">Bio</a></li>
+            <li><a href="#" onclick="scrollToSection(8)">Contato</a></li>
         </ul>
     </div>
 
@@ -256,23 +257,87 @@
             <section class="section">
                 <button onclick="scrollToSection(0)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
                 <div class="app-window">
-                    <div class="w-full h-[87.5%] bg-black relative">
-                        <video id="intro-video" src="INTRO.mp4" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
-                        <button id="unmute-btn" class="absolute bottom-4 right-4 bg-white/20 backdrop-blur-md text-white w-10 h-10 rounded-full flex items-center justify-center border border-white/10 z-20">
-                            <i class="fa-solid fa-volume-xmark" id="mute-icon"></i>
+                    <div class="w-full flex-1 bg-black relative">
+                        <video class="video-player w-full h-full object-cover absolute inset-0" src="INTRO.mp4" loop muted playsinline></video>
+                        <button class="unmute-btn absolute bottom-4 right-4 bg-white/20 backdrop-blur-md text-white w-10 h-10 rounded-full flex items-center justify-center border border-white/10 z-20">
+                            <i class="fa-solid fa-volume-xmark mute-icon"></i>
                         </button>
                     </div>
-                    <div class="w-full h-[12.5%] flex flex-col items-center justify-center bg-white px-2">
+                    <div class="w-full shrink-0 flex flex-col items-center justify-center bg-white px-4 py-3 md:py-4">
                         <h3 class="font-modern text-[10px] md:text-sm font-bold tracking-[0.3em] uppercase">O Músico</h3>
-                        <p class="font-modern text-gray-400 text-[8px] md:text-[9px] tracking-[0.1em] text-center">Pluralidade da MPB traduzindo paixões e as saudades da vida.</p>
+                        <p class="font-modern text-gray-400 text-[8px] md:text-[9px] tracking-[0.1em] text-center mt-1">Pluralidade da MPB traduzindo paixões e as saudades da vida.</p>
                     </div>
                 </div>
                 <button onclick="scrollToSection(2)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right"></i></button>
             </section>
 
-            <!-- 2: SHOWS -->
+            <!-- 2: JANELA MÚSICA 1 -->
             <section class="section">
                 <button onclick="scrollToSection(1)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="app-window">
+                    <!-- Overlay de Animação: Tributo a Tom Jobim -->
+                    <div id="tribute-overlay" class="absolute inset-0 bg-white z-[60] flex items-center justify-center opacity-0 pointer-events-none">
+                        <h2 class="font-modern text-lg md:text-3xl text-black uppercase tracking-[0.3em] font-light text-center px-4 leading-relaxed">Tributo a<br>Tom Jobim</h2>
+                    </div>
+
+                    <div class="w-full flex-1 bg-black relative">
+                        <video class="video-player w-full h-full object-cover absolute inset-0" src="musica 1.mp4" loop muted playsinline></video>
+                        <button class="unmute-btn absolute bottom-4 right-4 bg-white/20 backdrop-blur-md text-white w-10 h-10 rounded-full flex items-center justify-center border border-white/10 z-20">
+                            <i class="fa-solid fa-volume-xmark mute-icon"></i>
+                        </button>
+                    </div>
+                    <div class="w-full shrink-0 flex flex-col items-center justify-center bg-white px-4 py-3 md:py-4">
+                        <h3 class="font-modern text-[10px] md:text-sm font-bold tracking-[0.2em] uppercase text-center leading-tight">Wave</h3>
+                        <p class="font-modern text-gray-400 text-[8px] md:text-[9px] tracking-[0.1em] text-center mt-1">Tom Jobim</p>
+                    </div>
+                </div>
+                <button onclick="scrollToSection(3)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right"></i></button>
+            </section>
+
+            <!-- 3: JANELA MÚSICA 2 (MEDLEY) -->
+            <section class="section">
+                <button onclick="scrollToSection(2)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="app-window">
+                    <div class="w-full flex-1 bg-black relative">
+                        <video class="video-player w-full h-full object-cover absolute inset-0" src="musica 2.mp4" loop muted playsinline></video>
+                        <button class="unmute-btn absolute bottom-4 right-4 bg-white/20 backdrop-blur-md text-white w-10 h-10 rounded-full flex items-center justify-center border border-white/10 z-20">
+                            <i class="fa-solid fa-volume-xmark mute-icon"></i>
+                        </button>
+                    </div>
+                    <div class="w-full shrink-0 flex flex-col items-center justify-center bg-white px-2 py-3 md:py-4">
+                        <h3 class="font-modern text-[10px] md:text-sm font-bold tracking-[0.2em] uppercase text-center">Medley - Tom Jobim</h3>
+                        <p class="font-modern text-gray-400 text-[7px] md:text-[9px] tracking-[0.05em] text-center leading-[1.4] mt-1">
+                            • Samba de Uma Nota Só - Tom Jobim e Newton Mendonça<br>
+                            • Só Danço Samba - Tom Jobim e Vinícius de Moraes<br>
+                            • Carta ao Tom 74 - Toquinho e Vinícius de Moraes<br>
+                            • Corcovado - Tom Jobim
+                        </p>
+                    </div>
+                </div>
+                <button onclick="scrollToSection(4)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right"></i></button>
+            </section>
+
+            <!-- 4: JANELA MÚSICA 3 -->
+            <section class="section">
+                <button onclick="scrollToSection(3)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="app-window">
+                    <div class="w-full flex-1 bg-black relative">
+                        <video class="video-player w-full h-full object-cover absolute inset-0" src="musica 3.mp4" loop muted playsinline></video>
+                        <button class="unmute-btn absolute bottom-4 right-4 bg-white/20 backdrop-blur-md text-white w-10 h-10 rounded-full flex items-center justify-center border border-white/10 z-20">
+                            <i class="fa-solid fa-volume-xmark mute-icon"></i>
+                        </button>
+                    </div>
+                    <div class="w-full shrink-0 flex flex-col items-center justify-center bg-white px-4 py-3 md:py-4">
+                        <h3 class="font-modern text-[10px] md:text-sm font-bold tracking-[0.2em] uppercase text-center leading-tight">Inútil Paisagem</h3>
+                        <p class="font-modern text-gray-400 text-[8px] md:text-[9px] tracking-[0.1em] text-center mt-1">Tom Jobim e Aloysio de Oliveira</p>
+                    </div>
+                </div>
+                <button onclick="scrollToSection(5)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right"></i></button>
+            </section>
+
+            <!-- 5: SHOWS -->
+            <section class="section">
+                <button onclick="scrollToSection(4)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
                 <div class="app-window px-4 py-8 md:p-12">
                     <h3 class="font-modern text-xl md:text-3xl text-center font-light tracking-[0.4em] uppercase mb-10">Agenda</h3>
                     <div class="space-y-6 max-w-xl mx-auto w-full">
@@ -280,12 +345,12 @@
                         <div class="border-b border-gray-100 pb-5 flex justify-between items-center"><div class="flex flex-col"><span class="text-[9px] font-bold text-gold tracking-widest">02 DEZ 2026</span><span class="text-sm font-light uppercase mt-1">Teatro Municipal - CTBA</span></div><a href="#" class="text-[8px] font-bold border border-black px-4 py-2 hover:bg-black hover:text-white transition tracking-[0.2em] uppercase">Tickets</a></div>
                     </div>
                 </div>
-                <button onclick="scrollToSection(3)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right"></i></button>
+                <button onclick="scrollToSection(6)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right"></i></button>
             </section>
 
-            <!-- 3: GALERIA -->
+            <!-- 6: GALERIA -->
             <section class="section">
-                <button onclick="scrollToSection(2)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                <button onclick="scrollToSection(5)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
                 <div class="app-window p-4 md:p-12">
                     <h3 class="font-modern text-xl md:text-3xl text-center font-light tracking-[0.4em] uppercase mb-10">Galeria</h3>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-2 flex-grow overflow-y-auto">
@@ -297,12 +362,12 @@
                         <img src="Caete-47.jpg" class="aspect-square object-cover rounded-xs">
                     </div>
                 </div>
-                <button onclick="scrollToSection(4)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right"></i></button>
+                <button onclick="scrollToSection(7)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right"></i></button>
             </section>
 
-            <!-- 4: BIO -->
+            <!-- 7: BIO -->
             <section class="section">
-                <button onclick="scrollToSection(3)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                <button onclick="scrollToSection(6)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
                 <div class="app-window p-6 md:p-12">
                     <h3 class="font-modern text-xl md:text-3xl text-center font-light tracking-[0.4em] uppercase mb-10">História</h3>
                     <div class="flex-grow flex items-center justify-center">
@@ -310,12 +375,12 @@
 "Os mais de 30 anos de carreira transformaram Caeté Preto num guardião da pluralidade musical brasileira. Da síncope de Noel Rosa ao minimalismo de João Gilberto, a sua música é uma curadoria apaixonada das relações humanas. O seu violão carrega o legado de mestres como Cartola, Chico Buarque e Milton Nascimento, enquanto a sua voz percorre os caminhos traçados por Tom Jobim e Djavan. Um artista plural. Mais do que um músico, Caeté é a expressão viva da MPB e da Bossa Nova em constante movimento."                        </p>
                     </div>
                 </div>
-                <button onclick="scrollToSection(5)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right"></i></button>
+                <button onclick="scrollToSection(8)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right"></i></button>
             </section>
 
-            <!-- 5: CONTATO -->
+            <!-- 8: CONTATO -->
             <section class="section">
-                <button onclick="scrollToSection(4)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                <button onclick="scrollToSection(7)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
                 <div class="app-window flex flex-col items-center justify-center text-center p-6">
                     <h3 class="font-modern text-xl md:text-3xl font-light tracking-[0.4em] uppercase mb-8">Contato</h3>
                     <p class="font-modern text-sm md:text-lg font-light text-gray-500 tracking-wider">contato@caetepreto.com.br</p>
@@ -331,7 +396,7 @@
         <div class="flex justify-center gap-6 text-[9px] tracking-widest uppercase text-gray-400 mb-6 md:mb-0">
             <span class="cursor-pointer" onclick="scrollToSection(0)">Início</span>
             <span class="cursor-pointer" onclick="scrollToSection(1)">O Músico</span>
-            <span class="cursor-pointer" onclick="scrollToSection(5)">Contato</span>
+            <span class="cursor-pointer" onclick="scrollToSection(8)">Contato</span>
         </div>
         <div class="flex justify-between items-center text-[7px] tracking-[0.4em] font-light uppercase text-gray-600 px-2 md:px-0">
             <span>Curitiba | Rio de Janeiro</span>
@@ -345,21 +410,57 @@
         const menuBackdrop = document.getElementById('menu-backdrop');
         const contactModal = document.getElementById('contact-modal');
         const pageLabel = document.getElementById('page-label');
-        const introVideo = document.getElementById('intro-video');
-        const muteIcon = document.getElementById('mute-icon');
 
         let currentIndex = 0;
-        const totalSections = 6;
-        const sectionNames = ["Início", "O Músico", "Shows", "Galeria", "Bio", "Contato"];
+        const totalSections = 9; 
+        const sectionNames = ["Início", "O Músico", "Música I", "Música II", "Música III", "Agenda", "Galeria", "História", "Contato"];
+
+        // Função para controlar qual vídeo deve tocar e qual deve pausar
+        function handleVideos(activeIndex) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, idx) => {
+                const video = section.querySelector('.video-player');
+                if (video) {
+                    if (idx === activeIndex) {
+                        let playPromise = video.play();
+                        if (playPromise !== undefined) {
+                            playPromise.catch(error => { console.log("Autoplay evitado pelo navegador."); });
+                        }
+                    } else {
+                        video.pause();
+                    }
+                }
+            });
+        }
 
         function scrollToSection(index) {
             if (index < 0 || index >= totalSections) return;
+            
+            // Lógica de Animação ao passar de "O Músico" (1) para "Wave" (2)
+            if (currentIndex === 1 && index === 2) {
+                const tributeOverlay = document.getElementById('tribute-overlay');
+                // Remove qualquer transição anterior e exibe a tela branca sólida instantaneamente
+                tributeOverlay.style.transition = 'none';
+                tributeOverlay.style.opacity = '1';
+                
+                // Força o navegador a reconhecer as alterações acima antes de prosseguir
+                void tributeOverlay.offsetWidth;
+                
+                // Começa a transição de esmaecer 1 segundo após a rolagem lateral (0.6s + 1.0s = 1.6s)
+                setTimeout(() => {
+                    tributeOverlay.style.transition = 'opacity 1.5s ease-in-out';
+                    tributeOverlay.style.opacity = '0';
+                }, 1600); 
+            }
+
             currentIndex = index;
             
-            // O movimento agora é rígido e calculado sobre o 100vw exato
             scrollWrapper.style.transform = `translateX(-${index * 100}vw)`;
             
             if(pageLabel) pageLabel.textContent = sectionNames[index];
+            
+            handleVideos(index); // Aciona o controle de Play/Pause da aba ativa
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
             toggleMobileMenu(false);
         }
@@ -380,15 +481,20 @@
             contactModal.style.visibility = show ? "visible" : "hidden";
         }
 
-        document.getElementById('unmute-btn').addEventListener('click', () => {
-            introVideo.muted = !introVideo.muted;
-            muteIcon.className = introVideo.muted ? 'fa-solid fa-volume-xmark' : 'fa-solid fa-volume-high';
+        // Lógica para múltiplos botões de mudo
+        document.querySelectorAll('.unmute-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const video = this.parentElement.querySelector('.video-player');
+                const icon = this.querySelector('.mute-icon');
+                
+                video.muted = !video.muted;
+                icon.className = video.muted ? 'fa-solid fa-volume-xmark mute-icon' : 'fa-solid fa-volume-high mute-icon';
+            });
         });
 
         document.getElementById('mobile-menu-btn').addEventListener('click', () => toggleMobileMenu(true));
         document.getElementById('close-mobile-btn').addEventListener('click', () => toggleMobileMenu(false));
 
-        // Touch Swipe Estabilizado
         let startX = 0;
         let isMoving = false;
 
@@ -400,7 +506,6 @@
         scrollWrapper.addEventListener('touchend', e => {
             if (!isMoving) return;
             const diff = startX - e.changedTouches[0].clientX;
-            // Sensibilidade de 50px para evitar toques acidentais
             if (Math.abs(diff) > 60) {
                 scrollToSection(currentIndex + (diff > 0 ? 1 : -1));
             }
@@ -412,6 +517,17 @@
             if (e.key === 'ArrowLeft') scrollToSection(currentIndex - 1);
             if (e.key === 'Escape') toggleContactModal(false);
         });
+
+        // Garantir que a lógica de vídeo rode na inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            handleVideos(currentIndex);
+        });
     </script>
 </body>
 </html>
+
+
+
+
+
+```
