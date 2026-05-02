@@ -281,8 +281,14 @@
                 <button onclick="scrollToSection(1)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
                 <div class="app-window">
                     <!-- Overlay de Animação: Tributo a Tom Jobim -->
-                    <div id="tribute-overlay" class="absolute inset-0 bg-white z-[60] flex items-center justify-center opacity-0 pointer-events-none">
-                        <h2 class="font-modern text-lg md:text-3xl text-black uppercase tracking-[0.3em] font-light text-center px-4 leading-relaxed">Tributo a<br>Tom Jobim</h2>
+                    <div id="tribute-overlay" class="absolute inset-0 z-[60] flex opacity-0 pointer-events-none" style="perspective: 2000px;">
+                        <!-- Lombada Fixa (Simula a margem do livro) -->
+                        <div class="w-[15px] md:w-[20px] h-full bg-gradient-to-r from-white to-gray-50 border-r border-gray-200 z-20 flex-shrink-0"></div>
+                        <!-- Capa Animada -->
+                        <div id="tribute-cover" class="flex-1 h-full bg-white origin-left flex items-center justify-center z-10 relative">
+                            <!-- O texto tem uma leve margem negativa para manter o centro visual exato -->
+                            <h2 class="font-modern text-lg md:text-3xl text-black uppercase tracking-[0.3em] font-light text-center px-4 leading-relaxed absolute left-0 right-0 -ml-[15px] md:-ml-[20px]">Tributo a<br>Tom Jobim</h2>
+                        </div>
                     </div>
 
                     <div class="w-full flex-1 bg-black relative">
@@ -444,17 +450,27 @@
             // Lógica de Animação ao passar de "O Músico" (1) para "Wave" (2)
             if (currentIndex === 1 && index === 2) {
                 const tributeOverlay = document.getElementById('tribute-overlay');
-                // Remove qualquer transição anterior e exibe a tela branca sólida instantaneamente
+                const tributeCover = document.getElementById('tribute-cover');
+                
+                // Remove qualquer transição anterior e exibe a tela sólida instantaneamente
                 tributeOverlay.style.transition = 'none';
                 tributeOverlay.style.opacity = '1';
+                
+                // Prepara a capa animada para começar fechada (0 graus)
+                tributeCover.style.transition = 'none';
+                tributeCover.style.transform = 'rotateY(0deg)';
                 
                 // Força o navegador a reconhecer as alterações acima antes de prosseguir
                 void tributeOverlay.offsetWidth;
                 
-                // Começa a transição de esmaecer 1 segundo após a rolagem lateral (0.6s + 1.0s = 1.6s)
+                // Começa a transição 1 segundo após a rolagem lateral (0.6s + 1.0s = 1.6s)
                 setTimeout(() => {
                     tributeOverlay.style.transition = 'opacity 1.5s ease-in-out';
                     tributeOverlay.style.opacity = '0';
+                    
+                    // Efeito "Abrindo a Capa": Gira apenas o corpo da página, lombada fica intacta
+                    tributeCover.style.transition = 'transform 1.5s ease-in-out';
+                    tributeCover.style.transform = 'rotateY(-110deg)';
                 }, 1600); 
             }
 
@@ -530,7 +546,3 @@
     </script>
 </body>
 </html>
-
-
-
-```
