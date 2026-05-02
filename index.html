@@ -44,7 +44,8 @@
             top: 0;
             left: 0;
             width: 100vw;
-            height: 100vh;
+            height: 100vh; /* Fallback */
+            height: 100dvh; /* Ajuste dinâmico para rodapé do Safari */
             z-index: -2;
             background-color: #050505;
             background-image: url('VIOLAO.jpg');
@@ -74,13 +75,17 @@
         .carousel-viewport {
             width: 100vw;
             height: calc(100vh - 64px); 
+            height: calc(100dvh - 64px); /* Safari Fix */
             margin-top: 64px;
             overflow: hidden;
             position: relative;
         }
 
         @media (min-width: 1025px) {
-            .carousel-viewport { height: calc(100vh - 64px - 40px); }
+            .carousel-viewport { 
+                height: calc(100vh - 64px - 40px); 
+                height: calc(100dvh - 64px - 40px); /* Safari Fix */
+            }
         }
 
         /* Fita do Carrossel */
@@ -113,7 +118,7 @@
             background-color: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(15px);
             width: 88%; 
-            height: 90%;
+            height: 82%; /* Diminuído de 90% para dar mais margem de segurança embaixo no iPad/iPhone */
             border-radius: 2px;
             position: relative;
             display: flex;
@@ -265,7 +270,7 @@
                     </div>
                     <div class="w-full shrink-0 flex flex-col items-center justify-center bg-white px-4 py-3 md:py-4">
                         <h3 class="font-modern text-[10px] md:text-sm font-bold tracking-[0.3em] uppercase">O Músico</h3>
-                        <p class="font-modern text-gray-400 text-[8px] md:text-[9px] tracking-[0.1em] text-center mt-1">Pluralidade da MPB traduzindo paixões e as saudades da vida.</p>
+                        <p class="font-modern text-gray-500 text-[8px] md:text-[9px] tracking-[0.1em] text-center mt-1">Pluralidade da MPB traduzindo paixões e as saudades da vida.</p>
                     </div>
                 </div>
                 <button onclick="scrollToSection(2)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right"></i></button>
@@ -288,7 +293,7 @@
                     </div>
                     <div class="w-full shrink-0 flex flex-col items-center justify-center bg-white px-4 py-3 md:py-4">
                         <h3 class="font-modern text-[10px] md:text-sm font-bold tracking-[0.2em] uppercase text-center leading-tight">Wave</h3>
-                        <p class="font-modern text-gray-400 text-[8px] md:text-[9px] tracking-[0.1em] text-center mt-1">Tom Jobim</p>
+                        <p class="font-modern text-gray-500 text-[8px] md:text-[9px] tracking-[0.1em] text-center mt-1">Tom Jobim</p>
                     </div>
                 </div>
                 <button onclick="scrollToSection(3)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right"></i></button>
@@ -306,7 +311,7 @@
                     </div>
                     <div class="w-full shrink-0 flex flex-col items-center justify-center bg-white px-2 py-3 md:py-4">
                         <h3 class="font-modern text-[10px] md:text-sm font-bold tracking-[0.2em] uppercase text-center">Medley - Tom Jobim</h3>
-                        <p class="font-modern text-gray-400 text-[7px] md:text-[9px] tracking-[0.05em] text-center leading-[1.4] mt-1">
+                        <p class="font-modern text-gray-500 text-[8px] md:text-[10px] tracking-[0.05em] text-center leading-[1.4] mt-2">
                             • Samba de Uma Nota Só - Tom Jobim e Newton Mendonça<br>
                             • Só Danço Samba - Tom Jobim e Vinícius de Moraes<br>
                             • Carta ao Tom 74 - Toquinho e Vinícius de Moraes<br>
@@ -322,14 +327,14 @@
                 <button onclick="scrollToSection(3)" class="nav-side-btn btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
                 <div class="app-window">
                     <div class="w-full flex-1 bg-black relative">
-                        <video class="video-player w-full h-full object-cover absolute inset-0" src="musica 3.mp4" loop muted playsinline></video>
+                        <video class="video-player w-full h-full object-cover absolute inset-0" src="musica3.mp4" loop muted playsinline></video>
                         <button class="unmute-btn absolute bottom-4 right-4 bg-white/20 backdrop-blur-md text-white w-10 h-10 rounded-full flex items-center justify-center border border-white/10 z-20">
                             <i class="fa-solid fa-volume-xmark mute-icon"></i>
                         </button>
                     </div>
                     <div class="w-full shrink-0 flex flex-col items-center justify-center bg-white px-4 py-3 md:py-4">
                         <h3 class="font-modern text-[10px] md:text-sm font-bold tracking-[0.2em] uppercase text-center leading-tight">Inútil Paisagem</h3>
-                        <p class="font-modern text-gray-400 text-[8px] md:text-[9px] tracking-[0.1em] text-center mt-1">Tom Jobim e Aloysio de Oliveira</p>
+                        <p class="font-modern text-gray-500 text-[8px] md:text-[9px] tracking-[0.1em] text-center mt-1">Tom Jobim e Aloysio de Oliveira</p>
                     </div>
                 </div>
                 <button onclick="scrollToSection(5)" class="nav-side-btn btn-next"><i class="fa-solid fa-chevron-right"></i></button>
@@ -525,9 +530,6 @@
     </script>
 </body>
 </html>
-
-
-
 
 
 ```
